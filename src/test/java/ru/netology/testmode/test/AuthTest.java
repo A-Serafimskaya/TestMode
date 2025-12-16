@@ -1,7 +1,7 @@
 package ru.netology.testmode.test;
 
 
-import org.hamcrest.Condition;
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,12 +29,11 @@ class AuthTest {
         var registeredUser = getRegisteredUser("active");
         // TODO: добавить логику теста, в рамках которого будет выполнена попытка входа в личный кабинет с учётными
         //  данными зарегистрированного активного пользователя, для заполнения полей формы используйте
-        //  пользователя registeredUser
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
         $("button.button").click();
         $("h2").shouldHave(Condition.exactText("Личный кабинет"));
-        $("h2").shouldBe(Condition.visible);
+        $("h2").shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
     @Test
